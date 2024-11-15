@@ -17,7 +17,8 @@ public void setUp() {
     String browser = ConfigReader.getProperty("browser");
 
     if (browser.equalsIgnoreCase("chrome")) {
-        WebDriverManager.chromedriver().setup();
+       // WebDriverManager.chromedriver().setup();
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless"); // Run without UI
         options.addArguments("--disable-gpu");
