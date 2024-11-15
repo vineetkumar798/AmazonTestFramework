@@ -12,33 +12,24 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public class Hooks {
     public static WebDriver driver;
 
-    @Before
-public void setUp() {
-    String browser = ConfigReader.getProperty("browser");
+  @Before
+    public void setUp() {
+        String browser = ConfigReader.getProperty("browser");
 
-    if (browser.equalsIgnoreCase("chrome")) {
-       // WebDriverManager.chromedriver().setup();
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // Run without UI
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--remote-allow-origins=*"); // Handle remote origins
-        driver = new ChromeDriver(options);
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        } else if (browser.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
+        } else if (browser.equalsIgnoreCase("ie")) {
+            WebDriverManager.iedriver().setup();
+            driver = new InternetExplorerDriver();
+        }
 
-    } else if (browser.equalsIgnoreCase("edge")) {
-        WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
-
-    } else if (browser.equalsIgnoreCase("ie")) {
-        WebDriverManager.iedriver().setup();
-        driver = new InternetExplorerDriver();
+        driver.manage().window().maximize();
+        driver.get(ConfigReader.getProperty("application.url"));
     }
-
-    driver.manage().window().maximize();
-    driver.get(ConfigReader.getProperty("application.url"));
-}
 
 
     @After
