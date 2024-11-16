@@ -20,7 +20,8 @@ public class Hooks {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");
+            //options.addArguments("--headless");
+            options.addArguments("--headless=new");
             options.addArguments("--remote-allow-origins=*");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
