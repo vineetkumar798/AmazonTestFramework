@@ -28,6 +28,7 @@ public class Hooks {
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--disable-gpu");
+            options.addArguments("--disable-blink-features=AutomationControlled");
             options.addArguments("--window-size=1920x1080");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("edge")) {
